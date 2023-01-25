@@ -1,5 +1,5 @@
-import {Marker} from "../../viewer/scene/marker/Marker.js";
-import {utils} from "../../viewer/scene/utils.js";
+import {Marker} from "ct-g-xeokit-viewer";
+import {utils} from "ct-g-xeokit-viewer/scene";
 
 /**
  * A {@link Marker} with an HTML label attached to it, managed by an {@link AnnotationsPlugin}.
@@ -67,6 +67,9 @@ class Annotation extends Marker {
         this._values = cfg.values || {};
         this._layoutDirty = true;
         this._visibilityDirty = true;
+
+        this._labelXOffset = cfg.labelXOffset ?? 20;
+        this._labelYOffset = cfg.labelYOffset ?? -17;
 
         this._buildHTML();
 
@@ -165,6 +168,9 @@ class Annotation extends Marker {
             this._marker.addEventListener("mouseleave", () => {
                 this.plugin.fire("markerMouseLeave", this);
             });
+            this._marker.addEventListener("contextmenu", (e) => {
+                this.plugin.fire("markerContextMenu", { event: e, annotation: this });
+            });
         }
         if (!this._labelExternal) {
             if (this._label) {
@@ -194,10 +200,8 @@ class Annotation extends Marker {
         this._marker.style.left = (Math.floor(left + canvasPos[0]) - 12) + "px";
         this._marker.style.top = (Math.floor(top + canvasPos[1]) - 12) + "px";
         this._marker.style["z-index"] = 90005 + Math.floor(this._viewPos[2]) + 1;
-        const offsetX = 20;
-        const offsetY = -17;
-        this._label.style.left = 20 + Math.floor(left + canvasPos[0] + offsetX) + "px";
-        this._label.style.top = Math.floor(top + canvasPos[1] + offsetY) + "px";
+        this._label.style.left = 20 + Math.floor(left + canvasPos[0] + this._labelXOffset) + "px";
+        this._label.style.top = Math.floor(top + canvasPos[1] + this._labelYOffset) + "px";
         this._label.style["z-index"] = 90005 + Math.floor(this._viewPos[2]) + 1;
     }
 

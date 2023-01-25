@@ -1,4 +1,4 @@
-import {Map} from "../../viewer/scene/utils/Map.js";
+import {Map} from "ct-g-xeokit-viewer/scene";
 
 const idMap = new Map();
 
@@ -339,6 +339,28 @@ class ContextMenu {
         }
         subs.push(callback);
     }
+
+    /**
+     * Cancels an event subscription that was previously made with {@link ContextMenu.on}.
+     *
+     * @param {String} subId Subscription ID
+     */
+    off(subId) {
+        if (subId === undefined || subId === null) {
+            return;
+        }
+        if (this._eventSubs) {
+            return;
+        }
+        const event = this._eventSubs[subId];
+        if (event) {
+            delete this._eventSubs[subId];
+            const subs = this._eventSubs[event];
+            if (subs) {
+                delete subs[subId];
+            }
+        }
+    };
 
     /**
      Fires an event at this ````ContextMenu````.

@@ -1,6 +1,4 @@
-import {Dot} from "../lib/html/Dot";
-import {Component} from "../../viewer/scene/Component.js";
-import {math} from "../../viewer/scene/math/math.js";
+import {Component, math} from "ct-g-xeokit-viewer";
 
 const FINDING_ORIGIN = 0;
 const FINDING_CORNER = 1;
@@ -118,11 +116,21 @@ class AngleMeasurementsControl extends Component {
         });
 
         this._onInputMouseDown = input.on("mousedown", (coords) => {
+            if (!input.mouseDownLeft) {
+                lastMouseCanvasX = null;
+                lastMouseCanvasY = null;
+                return;
+            }
+
             lastMouseCanvasX = coords[0];
             lastMouseCanvasY = coords[1];
         });
 
         this._onInputMouseUp = input.on("mouseup", (coords) => {
+            if (!lastMouseCanvasX || !lastMouseCanvasY) {
+                return;
+            }
+
             if (coords[0] > lastMouseCanvasX + mouseCanvasClickTolerance ||
                 coords[0] < lastMouseCanvasX - mouseCanvasClickTolerance ||
                 coords[1] > lastMouseCanvasY + mouseCanvasClickTolerance ||
@@ -164,6 +172,7 @@ class AngleMeasurementsControl extends Component {
                         this._currentAngleMeasurement.targetWireVisible = false;
                         this._currentAngleMeasurement.targetVisible = false;
                         this._currentAngleMeasurement.angleVisible = false;
+                        this._currentAngleMeasurement.clickable = false;
                         this._state = FINDING_CORNER;
                         this.fire("measurementStart", this._currentAngleMeasurement);
                     }
@@ -208,6 +217,7 @@ class AngleMeasurementsControl extends Component {
                         }
                         this._currentAngleMeasurement.targetVisible = true;
                         this._currentAngleMeasurement.angleVisible = true;
+                        this._currentAngleMeasurement.clickable = true;
                         this.fire("measurementEnd", this._currentAngleMeasurement);
                         this._currentAngleMeasurement = null;
                         this._state = FINDING_ORIGIN;

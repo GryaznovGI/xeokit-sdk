@@ -1,14 +1,6 @@
-import {Plugin} from "../../viewer/Plugin.js";
-import {math} from "../../viewer/scene/math/math.js";
-import {Scene} from "../../viewer/scene/scene/Scene.js";
-import {DirLight} from "./../../viewer/scene/lights/DirLight.js";
-import {Mesh} from "./../../viewer/scene/mesh/Mesh.js";
-import {ReadableGeometry} from "../../viewer/scene/geometry/ReadableGeometry.js";
-import {PhongMaterial} from "../../viewer/scene/materials/PhongMaterial.js";
-import {Texture} from "../../viewer/scene/materials/Texture.js";
-import {buildCylinderGeometry} from "../../viewer/scene/geometry/builders/buildCylinderGeometry.js";
+import {Plugin, Scene} from "ct-g-xeokit-viewer";
+import {math, DirLight, Mesh, ReadableGeometry, PhongMaterial, ClampToEdgeWrapping, Texture, buildCylinderGeometry} from "ct-g-xeokit-viewer/scene";
 import {CubeTextureCanvas} from "./CubeTextureCanvas.js";
-import {ClampToEdgeWrapping} from "../../viewer/scene/constants/constants";
 
 /**
  * {@link Viewer} plugin that lets us look at the entire {@link Scene} from along a chosen axis or diagonal.
@@ -133,8 +125,8 @@ class NavCubePlugin extends Plugin {
         this._navCubeCamera.ortho.near = 0.1;
         this._navCubeCamera.ortho.far = 2000;
 
-        navCubeScene.edgeMaterial.edgeColor = [0.2, 0.2, 0.2];
-        navCubeScene.edgeMaterial.edgeAlpha = 0.6;
+        navCubeScene.edgeMaterial.edgeColor = [0.4, 0.4, 0.4];
+        navCubeScene.edgeMaterial.edgeAlpha = 0.4;
 
         this._zUp = Boolean(viewer.camera.zUp);
 
@@ -211,14 +203,17 @@ class NavCubePlugin extends Plugin {
             geometry: new ReadableGeometry(navCubeScene, buildCylinderGeometry({
                 center: [0, 0, 0],
                 radiusTop: 0.001,
-                radiusBottom: 1.4,
+                radiusBottom: 2,
                 height: 0.01,
                 radialSegments: 20,
                 heightSegments: 1,
                 openEnded: true
             })),
             material: new PhongMaterial(navCubeScene, {
-                diffuse: [0.0, 0.0, 0.0], specular: [0, 0, 0], emissive: [0.0, 0.0, 0.0], alpha: 0.5
+                diffuse: [0.0, 0.0, 0.0],
+                specular: [155 / 255, 169 / 255, 173 / 255],
+                emissive: [155 / 255, 169 / 255, 173 / 255],
+                alpha: 0.2
             }),
             position: [0, -1.5, 0],
             visible: !!visible,

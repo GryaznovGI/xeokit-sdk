@@ -1,7 +1,6 @@
-import {Plugin} from "../../viewer/Plugin.js";
+import {Plugin, math} from "ct-g-xeokit-viewer";
+import {utils} from 'ct-g-xeokit-viewer/scene'
 import {Annotation} from "./Annotation.js";
-import {utils} from "../../viewer/scene/utils.js";
-import {math} from "../../viewer/scene/math/math.js";
 
 const tempVec3a = math.vec3();
 const tempVec3b = math.vec3();
@@ -466,6 +465,8 @@ class AnnotationsPlugin extends Plugin {
      * @param {Number[]} [params.look] Optional World-space position for {@link Camera#look}, used when this Annotation is associated with a {@link Camera} position.
      * @param {Number[]} [params.up] Optional World-space position for {@link Camera#up}, used when this Annotation is associated with a {@link Camera} position.
      * @param {String} [params.projection] Optional projection type for {@link Camera#projection}, used when this Annotation is associated with a {@link Camera} position.
+     * @param {Number} [params.labelXOffset] Optional label offset by X axis.
+     * @param {Number} [params.labelYOffset] Optional label offset by Y axis.
      * @returns {Annotation} The new {@link Annotation}.
      */
     createAnnotation(params) {
@@ -526,7 +527,9 @@ class AnnotationsPlugin extends Plugin {
             look: params.look,
             up: params.up,
             projection: params.projection,
-            visible: (params.visible !== false)
+            visible: (params.visible !== false),
+            labelXOffset: params.labelXOffset,
+            labelYOffset: params.labelYOffset
         });
         this.annotations[annotation.id] = annotation;
         annotation.on("destroyed", () => {

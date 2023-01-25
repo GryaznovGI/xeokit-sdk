@@ -1,5 +1,5 @@
-import {Plugin} from "../../viewer/Plugin.js";
-import {Skybox} from "../../viewer/scene/skybox/Skybox.js"
+import {Plugin} from "ct-g-xeokit-viewer";
+import {Skybox} from "ct-g-xeokit-viewer/scene"
 
 /**
  * {@link Viewer} plugin that manages skyboxes
@@ -79,6 +79,9 @@ class SkyboxesPlugin extends Plugin {
 
      @param {String} id Unique ID to assign to the skybox.
      @param {Object} params Skybox configuration.
+     @param {String} [params.src=null] Path to skybox texture
+     @param {String} [params.encoding="linear"] Texture encoding format.  See the {@link Texture#encoding} property for more info.
+     @param {Number} [params.size=1000] Size of this Skybox, given as the distance from the center at ````[0,0,0]```` to each face.
      @param {Boolean} [params.active=true] Whether the skybox plane is initially active. Only skyboxes while this is true.
      @returns {Skybox} The new skybox.
      */
@@ -89,9 +92,10 @@ class SkyboxesPlugin extends Plugin {
         }
         var skybox = new Skybox(this.viewer.scene, {
             id: id,
-            pos: params.pos,
-            dir: params.dir,
-            active: true || params.active
+            src: params.src === undefined ? null : params.src,
+            encoding: params.encoding === undefined ? 'linear' : params.encoding,
+            size: params.size === undefined ? 1000 : params.size,
+            active: params.active === undefined ? true : params.active,
         });
         this.skyboxes[id] = skybox;
         return skybox;
@@ -114,7 +118,7 @@ class SkyboxesPlugin extends Plugin {
      Destroys all skyboxes.
      */
     clear() {
-        var ids = Object.keys(this.viewer.scene.skyboxes);
+        var ids = Object.keys(this.viewer.scene.skyboxes || {});
         for (var i = 0, len = ids.length; i < len; i++) {
             this.destroySkybox(ids[i]);
         }
@@ -127,7 +131,6 @@ class SkyboxesPlugin extends Plugin {
      */
     destroy() {
         this.clear();
-        super.clear();
     }
 }
 

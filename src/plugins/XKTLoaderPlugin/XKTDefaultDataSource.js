@@ -1,4 +1,4 @@
-import {utils} from "../../viewer/scene/utils.js";
+import {utils} from "ct-g-xeokit-viewer/scene";
 
 /**
  * Default data access strategy for {@link XKTLoaderPlugin}.

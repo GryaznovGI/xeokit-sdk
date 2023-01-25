@@ -1,11 +1,12 @@
-import {math} from "../../viewer/scene/math/math.js";
-import {Mesh} from "../../viewer/scene/mesh/Mesh.js";
-import {ReadableGeometry} from "../../viewer/scene/geometry/ReadableGeometry.js";
-import {PhongMaterial} from "../../viewer/scene/materials/PhongMaterial.js";
-import {buildBoxGeometry} from "../../viewer/scene/geometry/builders/buildBoxGeometry.js";
-import {EdgeMaterial} from "../../viewer/scene/materials/EdgeMaterial.js";
-import {EmphasisMaterial} from "../../viewer/scene/materials/EmphasisMaterial.js";
-
+import {
+    buildBoxGeometry,
+    EdgeMaterial,
+    EmphasisMaterial,
+    Mesh,
+    PhongMaterial,
+    ReadableGeometry,
+} from "ct-g-xeokit-viewer";
+import {math} from "ct-g-xeokit-viewer/scene";
 
 /**
  * Renders a 3D plane within an {@link Overview} to indicate its {@link SectionPlane}'s current position and orientation.
@@ -34,39 +35,34 @@ class Plane {
         this._mesh = new Mesh(overviewScene, {
             id: sectionPlane.id,
             geometry: new ReadableGeometry(overviewScene, buildBoxGeometry({
-                xSize: .5,
-                ySize: .5,
+                xSize: .75,
+                ySize: .75,
                 zSize: .001
             })),
             material: new PhongMaterial(overviewScene, {
                 emissive: [1, 1, 1],
                 diffuse: [0, 0, 0],
-                backfaces: false
+                backfaces: true
             }),
             edgeMaterial: new EdgeMaterial(overviewScene, {
-                edgeColor: [0.0, 0.0, 0.0],
-                edgeAlpha: 1.0,
+                edgeColor: [209 / 255, 232 / 255, 179 / 255],
+                edgeAlpha: 0.0,
                 edgeWidth: 1
             }),
             highlightMaterial: new EmphasisMaterial(overviewScene, {
                 fill: true,
-                fillColor: [0.5, 1, 0.5],
-                fillAlpha: 0.7,
-                edges: true,
-                edgeColor: [0.0, 0.0, 0.0],
-                edgeAlpha: 1.0,
-                edgeWidth: 1
+                fillColor: [209 / 255, 232 / 255, 179 / 255],
+                fillAlpha: 0.0,
+                edges: false
             }),
             selectedMaterial: new EmphasisMaterial(overviewScene, {
                 fill: true,
-                fillColor: [0, 0, 1],
-                fillAlpha: 0.7,
-                edges: true,
-                edgeColor: [1.0, 0.0, 0.0],
-                edgeAlpha: 1.0,
-                edgeWidth: 1
+                fillColor: [209 / 255, 232 / 255, 179 / 255],
+                fillAlpha: 0.0,
+                edges: false
             }),
             highlighted: true,
+            selected: true,
             scale: [3, 3, 3],
             position: [0, 0, 0],
             rotation: [0, 0, 0],
@@ -121,8 +117,7 @@ class Plane {
     setHighlighted(highlighted) {
         this._highlighted = !!highlighted;
         this._mesh.highlighted = this._highlighted;
-        this._mesh.highlightMaterial.fillColor = highlighted ? [0, 0.7, 0] : [0, 0, 0];
-        // this._selectedMesh.highlighted = true;
+        this._mesh.highlightMaterial.fillAlpha = highlighted ? 0.5 : 0;
     }
 
     /**
@@ -143,9 +138,8 @@ class Plane {
      */
     setSelected(selected) {
         this._selected = !!selected;
-        this._mesh.edgeMaterial.edgeWidth = selected ? 3 : 1;
-        this._mesh.highlightMaterial.edgeWidth = selected ? 3 : 1;
-
+        this._mesh.selected = this._selected;
+        this._mesh.selectedMaterial.fillAlpha = selected ? 0.5 : 0;
     }
 
     /**

@@ -1,6 +1,5 @@
-import {math} from "../../viewer/scene/math/math.js";
-import {Plugin} from "../../viewer/Plugin.js";
-import {SectionPlane} from "../../viewer/scene/sectionPlane/SectionPlane.js";
+import {Plugin, SectionPlane} from "ct-g-xeokit-viewer";
+import {math} from "ct-g-xeokit-viewer/scene";
 import {Control} from "./Control.js";
 import {Overview} from "./Overview.js";
 
@@ -155,7 +154,7 @@ class SectionPlanesPlugin extends Plugin {
                     }),
 
                     onClickedNothing: (() => {
-                        this.hideControl();
+                        // this.hideControl();
                     })
                 });
             }

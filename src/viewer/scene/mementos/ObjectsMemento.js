@@ -174,11 +174,12 @@ class ObjectsMemento {
                 }
                 if (colorize) {
                     const objectColor = object.colorize;
+                    const isColorizing = object.meshes?.[0]?._colorizing || false;
                     if (objectColor) {
                         this.objectsColorize[i * 3 + 0] = objectColor[0];
                         this.objectsColorize[i * 3 + 1] = objectColor[1];
                         this.objectsColorize[i * 3 + 2] = objectColor[2];
-                        this.objectsHasColorize[i] = true;
+                        this.objectsHasColorize[i] = isColorizing;
                     } else {
                         this.objectsHasColorize[i] = false;
                     }

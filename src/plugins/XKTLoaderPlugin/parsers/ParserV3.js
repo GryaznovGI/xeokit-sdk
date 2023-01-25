@@ -6,14 +6,9 @@ Parser for .XKT Format V3
 
  */
 
-import {utils} from "../../../viewer/scene/utils.js";
-import * as p from "./lib/pako.js";
-import {math} from "../../../viewer/scene/math/math.js";
-
-let pako = window.pako || p;
-if (!pako.inflate) {  // See https://github.com/nodeca/pako/issues/97
-    pako = pako.default;
-}
+import pako from 'pako';
+import {math} from "ct-g-xeokit-viewer";
+import {utils} from "ct-g-xeokit-viewer/scene";
 
 function extract(elements) {
     return {
