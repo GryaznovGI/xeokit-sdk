@@ -1,11 +1,8 @@
-import {Plugin} from "../../viewer/Plugin.js";
-import {Storey} from "./Storey.js";
+import {Plugin, CameraMemento, math, ObjectsMemento} from "ct-g-xeokit-viewer";
+import {utils} from "ct-g-xeokit-viewer/scene";
 import {IFCStoreyPlanObjectStates} from "./IFCStoreyPlanObjectStates.js";
-import {math} from "../../viewer/scene/math/math.js";
-import {ObjectsMemento} from "../../viewer/scene/mementos/ObjectsMemento.js";
-import {CameraMemento} from "../../viewer/scene/mementos/CameraMemento.js";
+import {Storey} from "./Storey.js";
 import {StoreyMap} from "./StoreyMap.js";
-import {utils} from "../../viewer/scene/utils.js";
 
 const tempVec3a = math.vec3();
 const tempMat4 = math.mat4();

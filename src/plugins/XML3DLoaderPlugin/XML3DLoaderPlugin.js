@@ -1,6 +1,5 @@
-import {utils} from "../../viewer/scene/utils.js"
-import {Node} from "../../viewer/scene/nodes/Node.js";
-import {Plugin} from "../../viewer/Plugin.js";
+import {Plugin} from "ct-g-xeokit-viewer";
+import {Node, utils} from "ct-g-xeokit-viewer/scene"
 import {XML3DSceneGraphLoader} from "./XML3DSceneGraphLoader.js";
 
 /**

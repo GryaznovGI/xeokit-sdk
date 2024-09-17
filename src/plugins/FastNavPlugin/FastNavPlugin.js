@@ -1,4 +1,4 @@
-import {Plugin} from "../../viewer/Plugin.js";
+import {Plugin} from "ct-g-xeokit-viewer";
 
 /**
  * {@link Viewer} plugin that makes interaction smoother with large models, by temporarily switching

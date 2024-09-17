@@ -7,7 +7,9 @@ class Wire {
         this._highlightClass = "viewer-ruler-wire-highlighted";
 
         this._wire = document.createElement('div');
-        this._wire.className += this._wire.className ? ' viewer-ruler-wire' : 'viewer-ruler-wire';
+
+        var className = 'viewer-ruler-wire' + (cfg.className ? (' ' + cfg.className) : '');
+        this._wire.className += this._wire.className ? (' ' + className) : className;
 
         this._wireClickable = document.createElement('div');
         this._wireClickable.className += this._wireClickable.className ? ' viewer-ruler-wire-clickable' : 'viewer-ruler-wire-clickable';
@@ -172,8 +174,13 @@ class Wire {
     }
 
     destroy(visible) {
-        this._wire.parentElement.removeChild(this._wire);
-        this._wireClickable.parentElement.removeChild(this._wireClickable);
+        if (this._wire.parentElement) {
+            this._wire.parentElement.removeChild(this._wire);
+        }
+
+        if (this._wireClickable.parentElement) {
+            this._wireClickable.parentElement.removeChild(this._wireClickable);
+        }
     }
 }
 

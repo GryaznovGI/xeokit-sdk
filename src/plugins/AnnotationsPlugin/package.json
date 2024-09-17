@@ -1,0 +1,33 @@
+{
+  "name": "ct-g-xeokit-annotations-plugin",
+  "version": "0.0.11",
+  "private": false,
+  "module": "./dist/annotations.es.js",
+  "main": "./dist/annotations.cjs.js",
+  "types": "./types/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "types"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && cross-env NODE_ENV=production PLUGIN=annotations INPUT=./index.js rollup -c ../../../rollup/rollup.packages.config.js"
+  },
+  "dependencies": {
+    "ct-g-xeokit-viewer": "0.0.5"
+  },
+  "description": "Web Programming Toolkit for 3D/2D BIM and AEC Graphics",
+  "homepage": "https://xeokit.io",
+  "author": "Lindsay Kay",
+  "license": "See LICENSE.txt",
+  "bugs": {
+    "url": "https://github.com/xeokit/xeokit-sdk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xeokit/xeokit-sdk.git"
+  },
+  "gitHead": "e5bc82808f7da5e6cdca02c5e3d91000d34b6d32"
+}

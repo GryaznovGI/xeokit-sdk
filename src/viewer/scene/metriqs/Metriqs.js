@@ -7,31 +7,31 @@ import {math} from "../math/math.js";
 
 const unitsInfo = {
     meters: {
-        abbrev: "m"
+        abbrev: "Metriqs.M"
     },
     metres: {
-        abbrev: "m"
+        abbrev: "Metriqs.M"
     },
     centimeters: {
-        abbrev: "cm"
+        abbrev: "Metriqs.CM"
     },
     centimetres: {
-        abbrev: "cm"
+        abbrev: "Metriqs.CM"
     },
     millimeters: {
-        abbrev: "mm"
+        abbrev: "Metriqs.MM"
     },
     millimetres: {
-        abbrev: "mm"
+        abbrev: "Metriqs.MM"
     },
     yards: {
-        abbrev: "yd"
+        abbrev: "Metriqs.YD"
     },
     feet: {
-        abbrev: "ft"
+        abbrev: "Metriqs.FT"
     },
     inches: {
-        abbrev: "in"
+        abbrev: "Metriqs.IN"
     }
 };
 

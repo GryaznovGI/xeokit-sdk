@@ -1,10 +1,7 @@
-import {utils} from "../../viewer/scene/utils.js";
-import {VBOSceneModel} from "../../viewer/scene/models/VBOSceneModel/VBOSceneModel.js";
-import {Plugin} from "../../viewer/Plugin.js";
+import {Plugin} from "ct-g-xeokit-viewer";
+import {math, utils, VBOSceneModel} from "ct-g-xeokit-viewer/scene";
+import {earcut} from 'ct-g-xeokit-shared-plugin-lib';
 import {CityJSONDefaultDataSource} from "./CityJSONDefaultDataSource.js";
-import {math} from "../../viewer";
-
-import {earcut} from '../lib/earcut';
 
 const tempVec2a = math.vec2();
 const tempVec3a = math.vec3();

@@ -1,0 +1,34 @@
+{
+  "name": "ct-g-xeokit-distance-measurements-plugin",
+  "version": "0.0.17",
+  "private": false,
+  "module": "./dist/distance-measurements.es.js",
+  "main": "./dist/distance-measurements.cjs.js",
+  "types": "./types/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "types"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && cross-env NODE_ENV=production PLUGIN=distance-measurements INPUT=./index.js rollup -c ../../../rollup/rollup.packages.config.js"
+  },
+  "dependencies": {
+    "ct-g-xeokit-shared-plugin-lib": "0.0.4",
+    "ct-g-xeokit-viewer": "0.0.5"
+  },
+  "description": "Web Programming Toolkit for 3D/2D BIM and AEC Graphics",
+  "homepage": "https://xeokit.io",
+  "author": "Lindsay Kay",
+  "license": "See LICENSE.txt",
+  "bugs": {
+    "url": "https://github.com/xeokit/xeokit-sdk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xeokit/xeokit-sdk.git"
+  },
+  "gitHead": "e5bc82808f7da5e6cdca02c5e3d91000d34b6d32"
+}

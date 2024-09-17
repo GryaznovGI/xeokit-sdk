@@ -1,7 +1,7 @@
-import {Dot} from "../lib/html/Dot.js";
-import {Component} from "../../viewer/scene/Component.js";
-import {math} from "../../viewer/scene/math/math.js";
-import {Marker} from "../../viewer";
+import {Component, Marker} from "ct-g-xeokit-viewer";
+import {math} from "ct-g-xeokit-viewer/scene";
+
+import {Dot} from "ct-g-xeokit-shared-plugin-lib";
 
 /**
  * Creates {@link DistanceMeasurement}s from mouse and touch input.
@@ -136,11 +136,21 @@ class DistanceMeasurementsControl extends Component {
         });
 
         this._onInputMouseDown = input.on("mousedown", (coords) => {
+            if (!input.mouseDownLeft) {
+                lastMouseCanvasX = null;
+                lastMouseCanvasY = null;
+                return;
+            }
+
             lastMouseCanvasX = coords[0];
             lastMouseCanvasY = coords[1];
         });
 
         this._onInputMouseUp = input.on("mouseup", (coords) => {
+            if (!lastMouseCanvasX || !lastMouseCanvasY) {
+                return;
+            }
+
             if (coords[0] > lastMouseCanvasX + mouseCanvasClickTolerance ||
                 coords[0] < lastMouseCanvasX - mouseCanvasClickTolerance ||
                 coords[1] > lastMouseCanvasY + mouseCanvasClickTolerance ||
@@ -190,7 +200,19 @@ class DistanceMeasurementsControl extends Component {
                             entity: mouseHoverEntity,
                             worldPos: mouseWorldPos
                         },
-                        approximate: true
+                        approximate: true,
+                        xAxisColor: plugin.xAxisColor,
+                        yAxisColor: plugin.yAxisColor,
+                        zAxisColor: plugin.zAxisColor,
+                        xAxisLabelColor: plugin.xAxisLabelColor,
+                        yAxisLabelColor: plugin.yAxisLabelColor,
+                        zAxisLabelColor: plugin.zAxisLabelColor,
+                        xAxisClassName: plugin.xAxisClassName,
+                        yAxisClassName: plugin.yAxisClassName,
+                        zAxisClassName: plugin.zAxisClassName,
+                        xAxisLabelClassName: plugin.xAxisLabelClassName,
+                        yAxisLabelClassName: plugin.yAxisLabelClassName,
+                        zAxisLabelClassName: plugin.zAxisLabelClassName,
                     });
                     this._currentDistanceMeasurementByMouseInittouchState.axisVisible = this._currentDistanceMeasurementByMouse.axisVisible && this.plugin.defaultAxisVisible;
 
@@ -270,7 +292,19 @@ class DistanceMeasurementsControl extends Component {
                                     entity: mouseHoverEntity,
                                     worldPos: pickResult.worldPos
                                 },
-                                approximate: (!pickSurfacePrecisionEnabled)
+                                approximate: (!pickSurfacePrecisionEnabled),
+                                xAxisColor: plugin.xAxisColor,
+                                yAxisColor: plugin.yAxisColor,
+                                zAxisColor: plugin.zAxisColor,
+                                xAxisLabelColor: plugin.xAxisLabelColor,
+                                yAxisLabelColor: plugin.yAxisLabelColor,
+                                zAxisLabelColor: plugin.zAxisLabelColor,
+                                xAxisClassName: plugin.xAxisClassName,
+                                yAxisClassName: plugin.yAxisClassName,
+                                zAxisClassName: plugin.zAxisClassName,
+                                xAxisLabelClassName: plugin.xAxisLabelClassName,
+                                yAxisLabelClassName: plugin.yAxisLabelClassName,
+                                zAxisLabelClassName: plugin.zAxisLabelClassName,
                             });
                             measurement.clickable = true;
                             touchState = FIRST_TOUCH_EXPECTED;

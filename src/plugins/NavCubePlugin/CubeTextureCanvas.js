@@ -1,4 +1,4 @@
-import {math} from "../../viewer/scene/math/math.js";
+import {math} from "ct-g-xeokit-viewer";
 
 /**
  * @private
@@ -158,12 +158,14 @@ function CubeTextureCanvas(viewer, cfg = {}) {
                 }
             }
             if (area.label) {
-                context.fillStyle = "black";
-                context.font = '60px sans-serif';
+                context.fillStyle = "white";
+                context.strokeStyle ="black";
+                context.font = '80px sans-serif';
                 context.textAlign = "center";
                 var xcenter = xmin + (width * 0.5);
                 var ycenter = ymin + (height * 0.7);
-                context.fillText(translateLabel(area.label), xcenter, ycenter, 80);
+                context.fillText(translateLabel(area.label), xcenter, ycenter, 100);
+                context.strokeText(translateLabel(area.label), xcenter, ycenter, 100);
             }
         }
 

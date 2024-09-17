@@ -1,9 +1,5 @@
-import {Marker} from "../../viewer/scene/marker/Marker.js";
-import {Wire} from "../lib/html/Wire.js";
-import {Dot} from "../lib/html/Dot.js";
-import {Label} from "../lib/html/Label.js";
-import {math} from "../../viewer/scene/math/math.js";
-import {Component} from "../../viewer/scene/Component.js";
+import {Component, Marker, math} from "ct-g-xeokit-viewer";
+import {Dot, Label, Wire} from "ct-g-xeokit-shared-plugin-lib";
 
 var originVec = math.vec3();
 var targetVec = math.vec3();
@@ -274,14 +270,11 @@ class AngleMeasurement extends Component {
                 (targetVec[0] !== 0 || targetVec[1] !== 0 || targetVec[2] !== 0);
 
             if (validVecs) {
-
-                const tilde = this._approximate ? " ~ " : " = ";
-
                 math.normalizeVec3(originVec);
                 math.normalizeVec3(targetVec);
                 const angle = Math.abs(math.angleVec3(originVec, targetVec));
                 this._angle = angle / math.DEGTORAD;
-                this._angleLabel.setText(tilde + this._angle.toFixed(2) + "°");
+                this._angleLabel.setText(" " + this._angle.toFixed(2) + "°");
             } else {
                 this._angleLabel.setText("");
             }

@@ -1,8 +1,8 @@
-import {utils} from "../../viewer/scene/utils.js"
-import {VBOSceneModel} from "../../viewer/scene/models/VBOSceneModel/VBOSceneModel.js";
-import {Plugin} from "../../viewer/Plugin.js";
+import {VBOSceneModel,Plugin} from "ct-g-xeokit-viewer"
+import {utils} from "ct-g-xeokit-viewer/scene"
+import {IFCObjectDefaults} from "ct-g-xeokit-viewer/metadata/IFCObjectDefaults";
+
 import {XKTDefaultDataSource} from "./XKTDefaultDataSource.js";
-import {IFCObjectDefaults} from "../../viewer/metadata/IFCObjectDefaults.js";
 
 import {ParserV1} from "./parsers/ParserV1.js";
 import {ParserV2} from "./parsers/ParserV2.js";
